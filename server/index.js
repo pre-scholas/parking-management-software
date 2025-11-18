@@ -1,30 +1,29 @@
 import express from "express"
-import mongoose from "mongoose"
 import 'dotenv/config'
+import connectDB from "./db.js";
 
-const app = express
-const PORT = process.env.PORT || 5050
-const MONGODB_URI = process.env.ATLAS_URI
+const app = express()
+const PORT = process.env.PORT || 8080
 
+// Connect to the database
+connectDB();
 
-// Database connection
-mongoose.connect(MONGODB_URI)
-    .then(() => console.log('Successfully connected to MongoDB.'))
-    .catch(err => console.error('Connection error', err));
+// Middleware to parse JSON bodies
+app.use(express.json());
 
+// Basic route to check if the server is running
+app.get("/", (req, res) => {
+    res.send("Parking Management API is running.")
+})
 
-// Middleware
-//----app.use(express.json());
-
-// Basic route
-// app.get("/", (req, res) => {
-//     res.send("Used Bike Sales API.")
-// })
+// Example: User routes (you can create this file later)
+// import userRoutes from './routes/userRoutes.js';
+// app.use('/api/users', userRoutes);
 
 // Routes
 //---app.use('/api/bikes', bikeRoutes)
 
-// start sever
+// Start server
 app.listen(PORT, () => {
     console.log(`Listening on port: ${PORT}!`)
 })
