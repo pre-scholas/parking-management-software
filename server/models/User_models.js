@@ -49,12 +49,12 @@ const UserSchema = new mongoose.Schema({
 // .licensePlate: Array of references to userVehicle documents
 
 // Optional: Add a pre-save hook to hash the password before saving a new user
-userSchema.pre('save', async function (next) {
-  if (this.isModified('password')) {
-    this.password = await bcrypt.hash(this.password, 10);
-  }
-  next();
-});
+// UserSchema.pre('save', async function (next) {
+//   if (this.isModified('password')) {
+//     this.password = await bcrypt.hash(this.password, 10);
+//   }
+//   next();
+// });
 
 // Method to update lastLogin field (example of a custom method)
 UserSchema.methods.updateLastLogin = function () {
@@ -63,5 +63,7 @@ UserSchema.methods.updateLastLogin = function () {
 };
 
 const User = mongoose.model('User', UserSchema);
+
+
 
 export default User;

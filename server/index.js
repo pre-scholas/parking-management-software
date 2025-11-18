@@ -8,6 +8,8 @@ const PORT = process.env.PORT || 8080
 // Connect to the database
 connectDB();
 
+import User from "./models/User_models.js";
+
 // Middleware to parse JSON bodies
 app.use(express.json());
 
@@ -15,6 +17,18 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send("Parking Management API is running.")
 })
+
+// posting route > usersSchema to mongodb
+app.post('/', async (req, res) => {
+    // const character = await Character.insertOne({ name: 'Jean-Luc Picard' });
+    // character.name; // 'Jean-Luc Picard'
+   const result = await User.insertOne({
+        username: "greg",
+        email: 'quinn@cool.com',
+        password: 'yaduuedmno',
+    })
+    res.send(result)
+})  
 
 // Example: User routes (you can create this file later)
 // import userRoutes from './routes/userRoutes.js';
