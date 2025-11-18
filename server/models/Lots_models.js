@@ -1,37 +1,34 @@
 import mongoose from "mongoose";
 
-const LotSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const LotSchema = new Schema({
+    // The unique name of the parking lot (e.g., "Main Street Lot", "Airport Garage A")
     name: {
         type: String,
         required: true,
         unique: true
     },
+    // The total number of parking spots in this lot.
     totalSpots: {
         type: Number,
         required: true,
     },
+    // The number of currently available spots. This is expected to be updated frequently.
     availableSpots: {
-        //this is calculated and updated frequently
         type: Number,
         required: true,
     },
+    // The parking rate per hour.
     hourlyRate: {
         type: Number,
         required: true,
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now,
-    },
-    
-})
+}, {
+    // Automatically adds and manages createdAt and updatedAt timestamps
+    timestamps: true
+});
 
 const Lot = mongoose.model('Lot', LotSchema);
 
 export default Lot;
-
-
