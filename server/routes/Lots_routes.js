@@ -2,15 +2,15 @@ import express from 'express'
 
 const router = express.Router()
 
-import lotsController from '../controllers/Lots_controller'
+import lotsController from '../controllers/Lots_controller.js'
 
-router.get('/', lotsController.getTodos)
+router.get('/', lotsController.getLots)
 
-router.post('/', lotsController.createTodo)
+router.post('/', lotsController.createLot)
 
-router.delete('/:id', lotsController.deleteTodo)
+router.delete('/:id', lotsController.deleteLot)
 
-router.put('/:id', lotsController.updateTodo)
+router.put('/:id', lotsController.updateLot)
 
 export default router
 

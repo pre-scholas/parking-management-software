@@ -1,11 +1,11 @@
-import lots from '../models/Lots_models.js';
+import Lots from '../models/Lots_models.js';
 
 const getLots = async (req, res) => {
     try {
-        const lot = await Lots.find({})
-        res.status(200).json(lot)
+        const lots = await Lots.find({})
+        res.status(200).json(lots)
     } catch (error) {
-        console.log(error.message)
+        console.error(error.message)
         res.status(400).json({ error: error.message })
     }
 }
@@ -15,10 +15,10 @@ const createLot = async (req, res) => {
     try {
         console.log(req.body);
         const lot = await Lots.create(req.body)
-        res.status(200).json(todo)
+        res.status(201).json(lot)
     } catch (e) {
-        console.log(e.message)
-        res.status(400).json({ error: e.message })
+        console.error(e.message)
+        res.status(400).json({ error: e.message, message: "Could not create Lot" })
     }
 }
 
@@ -26,23 +26,26 @@ const createLot = async (req, res) => {
 const deleteLot = async (req, res) => {
     try {
         const response = await Lots.findByIdAndDelete(req.params.id)
-        console.log(response)
+        if (!response) {
+            return res.status(404).json({ message: "Lot not found" });
+        }
         res.status(200).json(response)
     } catch (e) {
-        console.log(e)
+        console.error(e)
         res.status(400).json({ error: e.message })
     }
 }
 
 const updateLot = async (req, res) => {
     try {
-        const lot = await Lots.findById(req.params.id)
-        lot.completed = !lot.completed
-        await lot.save()
-        res.status(200).json(todo)
+        const lot = await Lots.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        if (!lot) {
+            return res.status(404).json({ message: "Lot not found" });
+        }
+        res.status(200).json(lot)
     } catch (e) {
-        console.log(e)
-        res.status(400).json({ error: e.message })
+        console.error(e)
+        res.status(400).json({ error: e.message, message: "Could not update Lot" })
     }
 }
 
