@@ -23,9 +23,9 @@ app.post('/', async (req, res) => {
     // const character = await Character.insertOne({ name: 'Jean-Luc Picard' });
     // character.name; // 'Jean-Luc Picard'
    const result = await User.insertOne({
-        username: "greg",
-        email: 'quinn@cool.com',
-        password: 'yaduuedmno',
+        username: "Jazmine",
+        email: 'min@jazz.com',
+        password: 'yaf',
     })
     res.send(result)
 })  

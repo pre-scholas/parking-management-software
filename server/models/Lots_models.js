@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const LotSchema = new Schema({
+const LotsSchema = new Schema({
     // The unique name of the parking lot (e.g., "Main Street Lot", "Airport Garage A")
     name: {
         type: String,
@@ -29,6 +29,6 @@ const LotSchema = new Schema({
     timestamps: true
 });
 
-const Lot = mongoose.model('Lot', LotSchema);
+const Lots = mongoose.model('Lots', LotsSchema);
 
-export default Lot;
+export default Lots;
