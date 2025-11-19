@@ -3,6 +3,12 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema
 
 const VehicleSchema = new Schema({
+    licensePlate: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+    },
     make: {
         type: String,
         required: true
@@ -18,12 +24,14 @@ const VehicleSchema = new Schema({
     },
     owner: {
         // this is how you reference another document
-        type: mongoose.userSchema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',// refers to the 'User' model defined above
         required: true
     }
+}, {
+    timestamps: true
 });
 
-const Vehicle = mongoose.model('Vehicle', vehicleSchema);
+const UserVehicle = mongoose.model('UserVehicle', VehicleSchema);
 // Mongoose will automatically look for the 'vehicles' collection name.
-export default Vehicle;
+export default UserVehicle;

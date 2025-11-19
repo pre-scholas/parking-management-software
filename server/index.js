@@ -10,6 +10,8 @@ connectDB();
 
 import userRoutes from './routes/User_routes.js'; // Import user routes
 import lotsRoutes from './routes/Lots_routes.js';
+import vehicleRoutes from './routes/UserVehicle_routes.js';
+import spotRoutes from './routes/Spots_routes.js';
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -24,6 +26,10 @@ app.get("/", (req, res) => {
 app.use('/api/users', userRoutes);
 // Use the lots routes for any request to /api/lots
 app.use('/api/lots', lotsRoutes);
+// Use the vehicle routes
+app.use('/api/vehicles', vehicleRoutes);
+// Use the spot routes
+app.use('/api/spots', spotRoutes);
 
 // Start server
 app.listen(PORT, () => {

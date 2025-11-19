@@ -6,7 +6,7 @@ const ParkingSpotSchema = new Schema({
     // Reference to the parent parking lot document
     lotId: {
         type: Schema.Types.ObjectId,
-        ref: 'ParkingLot', // Assuming a 'ParkingLot' model exists
+        ref: 'Lots', // Refers to the 'Lots' model
         required: true
     },
     // Unique identifier for the spot (e.g., A1, B15, Level 2 Spot 03)
@@ -30,14 +30,12 @@ const ParkingSpotSchema = new Schema({
         required: true,
         enum: ['car', 'motorcycle', 'truck', 'EV', 'handicap', 'compact'], // Restricts values to these options
     },
+}, {
     // Automatically adds createdAt and updatedAt timestamps
-    timestamps: {
-        type: Date,
-        default: Date.now
-    }
+    timestamps: true
 });
 
 // Create the model from the schema
-const ParkingSpot = mongoose.model('ParkingSpot', ParkingSpotSchema);
+const Spot = mongoose.model('Spot', ParkingSpotSchema);
 
-module.exports = ParkingSpot;
+export default Spot;
