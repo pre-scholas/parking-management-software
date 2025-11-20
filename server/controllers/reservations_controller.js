@@ -2,9 +2,9 @@ import Reservation from '../models/Reservation_models.js';
 import Lot from '../models/Lots_models.js';
 
 /**
- * @desc    Create a new reservation
- * @route   POST /api/reservations
- * @access  Private
+ *     Create a new reservation
+ *    POST /api/reservations
+ *   Private
  */
 export const createReservation = async (req, res) => {
     const { user, lot, startTime, endTime, vehicleInfo } = req.body;
@@ -41,9 +41,9 @@ export const createReservation = async (req, res) => {
 };
 
 /**
- * @desc    Get all reservations for a user
- * @route   GET /api/reservations
- * @access  Private
+ *  Get all reservations for a user
+ *    GET /api/reservations
+ *      Private
  */
 export const getMyReservations = async (req, res) => {
     // Assuming user ID is available from auth middleware

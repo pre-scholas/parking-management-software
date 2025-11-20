@@ -29,7 +29,8 @@ export const processPayment = async (req, res) => {
         const createdPayment = await payment.save();
 
         res.status(201).json({
-            message: 'Payment processed successfully',
+            success: true,
+            message: 'Payment processed successfully', // add reservation.user
             payment: createdPayment,
         });
 
