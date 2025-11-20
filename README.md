@@ -49,3 +49,18 @@ We'll use Mongoose (an ODM for MongoDB) to define structured schemas for consist
    .amount, date, paymentMethod
 
 ***********************
+
+### Phase 2: Frontend Development (React)
+
+The React application will be a two-part system: the **User App** (for booking) and the **Admin Dashboard**.
+
+- **Lot Map Component:** This component fetches all `SpotSchema` data on initial load. It renders a visual, clickable grid of the parking lot layout. It uses different colors to represent the `status` (e.g., green for available, red for occupied, yellow for reserved).
+
+1. **State Management:** Use the **Context API** or a library like **Zustand** to manage global state for user authentication, lot configurations, and the real-time `availableSpots` count.
+2. **Key Components:**
+
+  (*)  - **Socket Listener Hook:** A custom hook (`useRealTimeParking`) that initializes the Socket.IO connection and listens specifically for the `'spot_status_update'` event. When it receives data, it updates the component's state instantly, causing the relevant parking spot to change color on the map without a page refresh.(*)
+  
+    - **Reservation Component:** A form to collect license plate, duration, and integrate a payment widget.
+  
+    - **Admin Reporting Component:** Charts and tables (using a library like **Recharts**) to display real-time occupancy rates, daily revenue, and peak usage times.
