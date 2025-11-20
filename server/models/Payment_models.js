@@ -1,26 +1,34 @@
 import mongoose from "mongoose";
 
-const userSchema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const PaymentSchema = new Schema({
-    reservationId: {
-        type: userSchema.Types.OjectId,
-        ref: 'Reservation', // refers to the 'Reservation' model
+    // Reference to the reservation this payment is for
+    reservation: {
+        type: Schema.Types.ObjectId,
+        ref: 'Reservation',
         required: true,
     },
+    // The amount paid
     amount: {
-        type: Number, // Use Number for currency or Decimal for precision
+        type: Number,
         required: true,
     },
-    date: {
-        type: Date,
-        default: Date.now, // defaults to the current time of document creation
-        required: true,
-    },
+    // The method of payment
     paymentMethod: {
         type: String,
-        required: true,
-        enum: ['Credit Card', 'PayPal', 'Cash', 'Bank Transfer'], // Example enum for allowed methods
-    }
-    // other payment-related fields (e.g., transaction ID from a payment processor)
-})
+        default: 'Credit Card',
+    },
+    // The status of the payment
+    status: {
+        type: String,
+        enum: ['succeeded', 'failed', 'pending'],
+        default: 'pending',
+    },
+}, {
+    timestamps: true
+});
+
+const Payment = mongoose.model('Payment', PaymentSchema);
+
+export default Payment;

@@ -12,6 +12,8 @@ import userRoutes from './routes/User_routes.js'; // Import user routes
 import lotsRoutes from './routes/Lots_routes.js';
 import vehicleRoutes from './routes/UserVehicle_routes.js';
 import spotRoutes from './routes/Spots_routes.js';
+import reservationRoutes from './routes/reservation_routes.js';
+import paymentRoutes from './routes/payment_routes.js';
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -30,6 +32,10 @@ app.use('/api/lots', lotsRoutes);
 app.use('/api/vehicles', vehicleRoutes);
 // Use the spot routes
 app.use('/api/spots', spotRoutes);
+// Use the reservation routes
+app.use('/api/reservations', reservationRoutes);
+// Use the payment routes
+app.use('/api/payments', paymentRoutes);
 
 // Start server
 app.listen(PORT, () => {

@@ -1,41 +1,45 @@
-// parking spot reservation Schema
-// mongoose.Schema .types .ObjectId to reference the user and the spot models, and date for the time-related fields
-
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const ReservationSchema = new Schema({ 
-    userId: {
+const ReservationSchema = new Schema({
+    // Reference to the user who made the reservation
+    user: {
         type: Schema.Types.ObjectId,
-        ref: 'User', // Refers to the 'User' model
+        ref: 'User', // Assuming you have a User model
         required: true,
     },
-    spotId: {
+    // Reference to the parking lot for the reservation
+    lot: {
         type: Schema.Types.ObjectId,
-        ref: 'Spot', // Refers to the 'Spot' model
+        ref: 'Lots',
         required: true,
     },
+    // The start time of the reservation
     startTime: {
         type: Date,
         required: true,
     },
+    // The end time of the reservation
     endTime: {
         type: Date,
         required: true,
     },
-    actualExitTime: {
-        type: Date,
-        // This field is optional and may be null if the user hasn't exited yet
+    // Information about the vehicle
+    vehicleInfo: {
+        licensePlate: { type: String, required: true },
+        make: { type: String },
+        model: { type: String },
+        color: { type: String },
     },
-    // You might also want to add a status field, e.g., 'booked', 'active', 'completed', 'cancelled'
+    // Status of the reservation
     status: {
         type: String,
-        enum: ['booked', 'active', 'completed', 'cancelled'],
-        default: 'booked',
-    }
+        enum: ['active', 'completed', 'cancelled'],
+        default: 'active',
+    },
 }, {
-    timestamps: true // Automatically adds createdAt and updatedAt fields
+    timestamps: true
 });
 
 const Reservation = mongoose.model('Reservation', ReservationSchema);
