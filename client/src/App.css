@@ -1,10 +1,26 @@
 nav {
     position: relative;
-        height: 500px;
-        width: 70px;
-        background: #2b343b;
-        box-shadow: 10px 0 0 #4187f6;
-        border-left: 10px solid #2b343b;
-        overflow-x: hidden;
-        transition: width 0.5s;
+    height: 500px;
+    width: 70px;
+    background: #2b343b;
+    box-shadow: 10px 0 0 #4187f6;
+    border-left: 10px solid #2b343b;
+    overflow-x: hidden;
+    transition: width 0.5s;
+
+    ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-left: 5px;
+        padding-top: 40px;
+        li {
+            position: relative;
+                list-style: none;
+                width: 100%;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+        }
+    }
 }

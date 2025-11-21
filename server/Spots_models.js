@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
+
 const Schema = mongoose.Schema;
 
 const SpotSchema = new Schema({
     // A reference to the parking lot this spot belongs to.
     lot: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Lots', // This links it to the Lots model
         required: true,
     },
@@ -18,13 +19,7 @@ const SpotSchema = new Schema({
         type: Boolean,
         default: false,
     },
-}, {
-    timestamps: true
 });
-
-// Create a compound unique index on 'lot' and 'spotNumber'.
-// This ensures that spotNumber is unique within the scope of a single lot.
-SpotSchema.index({ lot: 1, spotNumber: 1 }, { unique: true });
 
 const Spot = mongoose.model('Spot', SpotSchema);
 
