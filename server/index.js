@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 8080
 // Connect to the database
 connectDB();
 
+// import routes
 import userRoutes from './routes/User_routes.js'; // Import user routes
 import lotsRoutes from './routes/Lots_routes.js';
 import vehicleRoutes from './routes/UserVehicle_routes.js';
