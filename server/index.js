@@ -1,5 +1,6 @@
 import express from "express"
 import 'dotenv/config'
+import cors from 'cors';
 import connectDB from "./db.js";
 
 const app = express()
@@ -15,9 +16,12 @@ import vehicleRoutes from './routes/UserVehicle_routes.js';
 import spotRoutes from './routes/Spots_routes.js';
 import reservationRoutes from './routes/reservation_routes.js';
 import paymentRoutes from './routes/payment_routes.js';
+import parkingSessionRoutes from './parkingSessionRoutes.js';
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+// Enable CORS for all routes
+app.use(cors());
 
 // Basic route to check if the server is running
 app.get("/", (req, res) => {
@@ -37,6 +41,8 @@ app.use('/api/spots', spotRoutes);
 app.use('/api/reservations', reservationRoutes);
 // Use the payment routes
 app.use('/api/payments', paymentRoutes);
+// Use the parking session routes
+app.use('/api/sessions', parkingSessionRoutes);
 
 // Start server
 app.listen(PORT, () => {

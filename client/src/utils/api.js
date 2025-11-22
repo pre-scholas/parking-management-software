@@ -22,6 +22,10 @@ export const getMyReservations = (userId) => api.get(`/reservations?userId=${use
 // --- Vehicle Functions ---
 export const getVehiclesByUserId = (userId) => api.get(`/vehicles/user/${userId}`);
 
+// --- Parking Session Functions ---
+export const checkIn = (sessionData) => api.post("/sessions/check-in", sessionData);
+export const checkOut = (sessionId) => api.patch(`/sessions/check-out/${sessionId}`);
+
 
 const apiClient = {
     getLots,
@@ -31,6 +35,8 @@ const apiClient = {
     createReservation,
     getMyReservations,
     getVehiclesByUserId,
+    checkIn,
+    checkOut,
 };
 
 export default apiClient;

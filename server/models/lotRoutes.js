@@ -1,5 +1,6 @@
 import express from 'express';
 import Lots from '../models/Lots_models.js';
+import ParkingSession from '../models/ParkingSession_models.js';
 
 const router = express.Router();
 
@@ -10,11 +11,22 @@ const router = express.Router();
  */
 router.get('/', async (req, res) => {
     try {
-        // Use the Lots model to find all documents in the 'lots' collection
-        const lots = await Lots.find({});
+        // Use .lean() for performance and to get plain JS objects
+        const lots = await Lots.find({}).lean();
 
-        // Send the found lots back as a JSON response
-        res.json(lots);
+        // Since `availableSpots` is a virtual that needs an async call,
+        // we need to manually compute it for each lot.
+        // We'll run the counts in parallel for efficiency.
+        const lotsWithAvailableSpots = await Promise.all(lots.map(async (lot) => {
+            const occupiedSpots = await ParkingSession.countDocuments({
+                lotId: lot._id,
+                checkOutTime: null
+            });
+            lot.availableSpots = lot.totalSpots - occupiedSpots;
+            return lot;
+        }));
+
+        res.json(lotsWithAvailableSpots);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
@@ -29,14 +41,21 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         // Find a lot by its ID, which is passed in the URL parameters
-        const lot = await Lots.findById(req.params.id);
+        const lot = await Lots.findById(req.params.id).lean();
 
         // If no lot is found with that ID, return a 404 Not Found error
         if (!lot) {
             return res.status(404).json({ msg: 'Lot not found' });
         }
 
-        // If the lot is found, send it back as a JSON response
+        // Manually calculate the available spots
+        const occupiedSpots = await ParkingSession.countDocuments({
+            lotId: lot._id,
+            checkOutTime: null
+        });
+        lot.availableSpots = lot.totalSpots - occupiedSpots;
+
+        // Send the lot object with the added availableSpots property
         res.json(lot);
     } catch (err) {
         console.error(err.message);
