@@ -1,4 +1,21 @@
-nav {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    min-height: 100vh;
+    background: rgb(26, 27, 76);
+}
+
+.navigation {
     position: relative;
     height: 500px;
     width: 70px;
@@ -7,20 +24,131 @@ nav {
     border-left: 10px solid #2b343b;
     overflow-x: hidden;
     transition: width 0.5s;
+}
 
-    ul {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding-left: 5px;
-        padding-top: 40px;
-        li {
-            position: relative;
-                list-style: none;
-                width: 100%;
-                border-top-left-radius: 10px;
-                border-bottom-left-radius: 10px;
-        }
+.navigation:hover {
+    width: 300px;
+}
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-left: 5px;
+    padding-top: 40px;
+}
+
+.navigation ul li {
+    position: relative;
+    list-style: none;
+    gap: 20px;
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.navigation ul li.active {
+    background: rgb(221, 105, 75);
+}
+
+.navigation ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: #fff;
+}
+
+.navigation ul li.active a::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: #2b343b;
+    border-radius: 50%;
+    box-shadow: 15px 15px 0 #4187f6;
+}
+
+.navigation ul li.active a::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: #2b343b;
+    border-radius: 50%;
+    box-shadow: 15px -15px 0 #4187f6;
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 70px;
+    text-align: center;
+}
+
+.navigation ul li a .icon ion-icon {
+    position: relative;
+    font-size: 1.5em;
+    z-index: 1;
+}
+
+.navigation ul li a .title {
+    position: relative;
+    display: block;
+    padding-left: 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: nowrap;
+}
+
+.navigation ul li button {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.navigation ul li button .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 70px;
+    text-align: center;
+}
+
+.navigation ul li button .icon ion-icon {
+    position: relative;
+    font-size: 1.5em;
+    z-index: 1;
+}
+
+.navigation ul li button .title {
+    position: relative;
+    display: block;
+    padding-left: 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: nowrap;
+}
+
+.App {
+    display: flex;
+   main {
+        align-items: center;
     }
 }
