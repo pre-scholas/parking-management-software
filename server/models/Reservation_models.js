@@ -6,7 +6,7 @@ const ReservationSchema = new Schema({
     // Reference to the user who made the reservation
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'User', // Assuming you have a User model
+        ref: 'User',
         required: true,
     },
     // Reference to the parking lot for the reservation
@@ -14,6 +14,11 @@ const ReservationSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Lots',
         required: true,
+    },
+    // Reference to the specific parking spot
+    spotId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Spot',
     },
     // The start time of the reservation
     startTime: {
@@ -24,6 +29,14 @@ const ReservationSchema = new Schema({
     endTime: {
         type: Date,
         required: true,
+    },
+    // Actual exit time (for completed reservations)
+    actualExitTime: {
+        type: Date,
+    },
+    // Total cost of the reservation
+    totalCost: {
+        type: Number,
     },
     // Information about the vehicle
     vehicleInfo: {

@@ -14,7 +14,7 @@ import userRoutes from './routes/User_routes.js'; // Import user routes
 import lotsRoutes from './routes/Lots_routes.js';
 import vehicleRoutes from './routes/UserVehicle_routes.js';
 import spotRoutes from './routes/Spots_routes.js';
-import reservationRoutes from './routes/reservation_routes.js';
+import reservationRoutes from './routes/Reservation_routes.js';
 import paymentRoutes from './routes/payment_routes.js';
 import parkingSessionRoutes from './parkingSessionRoutes.js';
 

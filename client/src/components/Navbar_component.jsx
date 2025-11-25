@@ -49,7 +49,7 @@ function Navbar() {
         setUser(null);
         // Redirect to login page
         navigate('/login');
-        
+
     };
 
     // Helper function to check if current page matches given path (for active styling)

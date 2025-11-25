@@ -28,7 +28,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
             />
-            <button className='login-btn' ype="submit">Log in</button>
+            <button className='login-btn' type="submit">Log in</button>
         </form>
     );
 }
