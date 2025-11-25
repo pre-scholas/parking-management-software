@@ -28,12 +28,18 @@ export const useDashboard = () => {
       setStats(data);
     } catch (err) {
       console.warn('Dashboard API not available, using mock data:', err.message);
-      // Mock data fallback
+      // Mock data fallback - calculate from current reservations
+      const currentReservations = JSON.parse(localStorage.getItem('userReservations') || '[]');
+      const activeReservations = currentReservations.filter(res => 
+        new Date(res.startTime) > new Date()
+      ).length;
+      const totalRevenue = currentReservations.reduce((sum, res) => sum + (res.totalCost || 0), 0);
+      
       setStats({
         totalLots: 3,
-        availableSpots: 165,
-        activeReservations: 2,
-        totalRevenue: 1250.75
+        availableSpots: 165 - activeReservations,
+        activeReservations: activeReservations,
+        totalRevenue: totalRevenue
       });
     } finally {
       setLoading(false);
@@ -42,6 +48,19 @@ export const useDashboard = () => {
 
   useEffect(() => {
     fetchDashboardStats();
+    
+    // Listen for reservation updates to refresh dashboard stats
+    const handleReservationUpdate = () => {
+      fetchDashboardStats();
+    };
+    
+    window.addEventListener('reservationCreated', handleReservationUpdate);
+    window.addEventListener('reservationCancelled', handleReservationUpdate);
+    
+    return () => {
+      window.removeEventListener('reservationCreated', handleReservationUpdate);
+      window.removeEventListener('reservationCancelled', handleReservationUpdate);
+    };
   }, []);
 
   const refreshStats = () => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useReservations } from '../hooks/useReservations';
 
 function LotsPage() {
     const [lots, setLots] = useState([]);
@@ -6,6 +7,7 @@ function LotsPage() {
     const [error, setError] = useState(null);
     const [checkingIn, setCheckingIn] = useState(null);
     const [reserving, setReserving] = useState(null);
+    const { createReservation } = useReservations();
 
     useEffect(() => {
         fetchLots();
@@ -119,15 +121,20 @@ function LotsPage() {
         setReserving(lot._id);
         
         try {
-            // Create reservation for 2 hours from now
+            // Create reservation for 1-3 hours from now
             const startTime = new Date(Date.now() + 60 * 60 * 1000); // 1 hour from now
             const endTime = new Date(Date.now() + 3 * 60 * 60 * 1000); // 3 hours from now
+            const duration = (endTime - startTime) / (1000 * 60 * 60); // hours
+            const totalCost = duration * lot.hourlyRate;
             
             const reservationData = {
                 user: 'demo-user-id',
                 lot: lot._id,
+                lotId: { name: lot.name },
+                spotId: { spotIdentifier: `${lot.name.charAt(0)}${Math.floor(Math.random() * 99) + 1}` },
                 startTime: startTime.toISOString(),
                 endTime: endTime.toISOString(),
+                totalCost: totalCost,
                 vehicleInfo: {
                     licensePlate: 'ABC123',
                     make: 'Toyota',
@@ -136,24 +143,12 @@ function LotsPage() {
                 }
             };
 
-            const response = await fetch('http://localhost:8080/api/reservations', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify(reservationData)
-            });
-
-            if (!response.ok) {
-                throw new Error('Reservation failed');
-            }
-
-            alert(`Reservation created for ${lot.name}!\nTime: ${startTime.toLocaleString()} - ${endTime.toLocaleString()}`);
+            await createReservation(reservationData);
+            alert(`Reservation created for ${lot.name}!\nSpot: ${reservationData.spotId.spotIdentifier}\nTime: ${startTime.toLocaleString()} - ${endTime.toLocaleString()}\nCost: $${totalCost.toFixed(2)}`);
             fetchLots();
         } catch (err) {
             console.error('Reservation error:', err);
-            alert(`Reservation created for ${lot.name}! (Demo Mode)\nCheck your reservations page for details.`);
+            alert('Failed to create reservation. Please try again.');
         } finally {
             setReserving(null);
         }

@@ -5,6 +5,7 @@
 @import './components/Login.css';
 @import './components/LotsPage.css';
 @import './components/Reservations.css';
+@import './components/UserProfile.css';
 
 /* Global Variables */
 :root {

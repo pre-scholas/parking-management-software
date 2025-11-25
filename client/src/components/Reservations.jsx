@@ -1,13 +1,35 @@
 import React, { useState, useEffect } from 'react';
+import { useReservations } from '../hooks/useReservations';
 
 function Reservations() {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { cancelReservation } = useReservations();
 
-  // Fetch user reservations on component mount
+  // Fetch user reservations on component mount and listen for updates
   useEffect(() => {
     fetchReservations();
+    
+    // Listen for new reservations
+    const handleReservationCreated = (event) => {
+      const newReservation = event.detail;
+      setReservations(prev => [newReservation, ...prev]);
+    };
+    
+    // Listen for cancelled reservations
+    const handleReservationCancelled = (event) => {
+      const { reservationId } = event.detail;
+      setReservations(prev => prev.filter(res => res._id !== reservationId));
+    };
+    
+    window.addEventListener('reservationCreated', handleReservationCreated);
+    window.addEventListener('reservationCancelled', handleReservationCancelled);
+    
+    return () => {
+      window.removeEventListener('reservationCreated', handleReservationCreated);
+      window.removeEventListener('reservationCancelled', handleReservationCancelled);
+    };
   }, []);
 
   const fetchReservations = async () => {
@@ -36,25 +58,11 @@ function Reservations() {
 
 
 
-  const cancelReservation = async (reservationId) => {
+  const handleCancelReservation = async (reservationId) => {
     if (!window.confirm('Are you sure you want to cancel this reservation?')) return;
     
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8080/api/reservations/${reservationId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      // Remove cancelled reservation from state
-      setReservations(prev => prev.filter(res => res._id !== reservationId));
+      await cancelReservation(reservationId);
       alert('Reservation cancelled successfully');
     } catch (err) {
       console.error('Error cancelling reservation:', err);
@@ -107,7 +115,7 @@ function Reservations() {
                 </div>
                 <button 
                   className="cancel-btn"
-                  onClick={() => cancelReservation(reservation._id)}
+                  onClick={() => handleCancelReservation(reservation._id)}
                 >
                   Cancel Reservation
                 </button>

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const useAuth = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -29,6 +31,7 @@ export const useAuth = () => {
     localStorage.removeItem('user');
     setUser(null);
     setIsAuthenticated(false);
+    navigate('/login');
   };
 
   return {
