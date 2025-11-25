@@ -2,6 +2,7 @@ import express from "express"
 import 'dotenv/config'
 import cors from 'cors';
 import connectDB from "./db.js";
+import { logger, rateLimiter, errorHandler, notFound } from './middleware/index.js';
 
 const app = express()
 const PORT = process.env.PORT || 8080
@@ -22,6 +23,10 @@ import parkingSessionRoutes from './parkingSessionRoutes.js';
 app.use(express.json());
 // Enable CORS for all routes
 app.use(cors());
+// Add logging middleware
+app.use(logger);
+// Add rate limiting (100 requests per 15 minutes)
+app.use(rateLimiter(100, 15 * 60 * 1000));
 
 // Basic route to check if the server is running
 app.get("/", (req, res) => {
@@ -43,6 +48,12 @@ app.use('/api/reservations', reservationRoutes);
 app.use('/api/payments', paymentRoutes);
 // Use the parking session routes
 app.use('/api/sessions', parkingSessionRoutes);
+
+// 404 handler for undefined routes
+app.use(notFound);
+
+// Error handling middleware (must be last)
+app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () => {

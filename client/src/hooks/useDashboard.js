@@ -27,7 +27,7 @@ export const useDashboard = () => {
       const data = await response.json();
       setStats(data);
     } catch (err) {
-      console.warn('Dashboard API not available, using mock data:', err.message);
+      console.log('API not available, using demo mode');
       // Mock data fallback - calculate from current reservations
       const currentReservations = JSON.parse(localStorage.getItem('userReservations') || '[]');
       const activeReservations = currentReservations.filter(res => 

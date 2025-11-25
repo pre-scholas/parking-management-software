@@ -1,24 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-:root {
-    --boxShadow-clr: #4187f6;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'poppins', sans-serif;
-}
-
-body {
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    min-height: 100vh;
-    background: rgb(26, 27, 76);
-}
-
 .navigation {
     position: relative;
     height: 500px;
@@ -28,7 +7,6 @@ body {
     border-left: 10px solid #2b343b;
     overflow-x: hidden;
     transition: width 0.5s;
-   
     border-radius: 5px;
 }
 
@@ -43,7 +21,6 @@ body {
     width: 100%;
     padding-left: 5px;
     padding-top: 40px;
-
 }
 
 .navigation ul li {
@@ -56,7 +33,7 @@ body {
 }
 
 .navigation ul li.active {
-    background: rgb(221, 105, 75);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .navigation ul li a {
@@ -151,30 +128,4 @@ body {
     height: 60px;
     line-height: 60px;
     white-space: nowrap;
-}
-
-.App {
-    display: flex;
-   main {
-    display: flex;
-        align-items: center;
-        margin-left: 20px;
-    }
-}
-
-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 30px;
-    width: 100%;
-    height: 500px;
-    border: 1px solid   #fff;
-
-    input {
-        margin: 10px;
-        border-radius: 10px;
-        padding: 10px;
-    }
 }

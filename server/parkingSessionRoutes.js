@@ -2,6 +2,7 @@ import express from 'express';
 import ParkingSession from './models/ParkingSession_models.js';
 import Lots from './models/Lots_models.js';
 import mongoose from 'mongoose';
+import { protect } from './middleware/index.js';
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ const router = express.Router();
  * @desc    Create a new parking session (check-in)
  * @access  Private (assuming user is authenticated)
  */
-router.post('/check-in', async (req, res) => {
+router.post('/check-in', protect, async (req, res) => {
     const { lotId, userId, vehicleId } = req.body;
 
     // Basic validation
@@ -51,7 +52,7 @@ router.post('/check-in', async (req, res) => {
  * @desc    End a parking session (check-out)
  * @access  Private
  */
-router.patch('/check-out/:sessionId', async (req, res) => {
+router.patch('/check-out/:sessionId', protect, async (req, res) => {
     try {
         const { sessionId } = req.params;
 

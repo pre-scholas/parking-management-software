@@ -72,10 +72,40 @@ const deleteUser = async (req, res) => {
     }
 };
 
+// Login user
+const loginUser = async (req, res) => {
+    res.status(200).json({ message: 'Login endpoint - implement JWT logic' });
+};
+
+// Register user
+const registerUser = async (req, res) => {
+    res.status(200).json({ message: 'Register endpoint - implement registration logic' });
+};
+
+// Get user profile
+const getUserProfile = async (req, res) => {
+    res.status(200).json({ message: 'Profile endpoint - implement profile logic' });
+};
+
+// Update user profile
+const updateUserProfile = async (req, res) => {
+    res.status(200).json({ message: 'Update profile endpoint' });
+};
+
+// Get user stats
+const getUserStats = async (req, res) => {
+    res.status(200).json({ message: 'User stats endpoint' });
+};
+
 export default {
     getUsers,
     getUserById,
     createUser,
     updateUser,
     deleteUser,
+    loginUser,
+    registerUser,
+    getUserProfile,
+    updateUserProfile,
+    getUserStats
 };

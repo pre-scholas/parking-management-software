@@ -35,22 +35,33 @@ function Reservations() {
   const fetchReservations = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8080/api/reservations', {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
       
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      // Try API first, but fall back to demo mode if it fails
+      try {
+        const response = await fetch('http://localhost:8080/api/reservations', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          setReservations(data);
+          setLoading(false);
+          return;
+        }
+      } catch (apiError) {
+        console.log('API not available, using demo mode');
       }
       
-      const data = await response.json();
-      setReservations(data);
+      // Fall back to demo mode - load from localStorage
+      const demoReservations = JSON.parse(localStorage.getItem('userReservations') || '[]');
+      setReservations(demoReservations);
+      
     } catch (err) {
       console.error('Error fetching reservations:', err);
-      setError(err.message);
+      setError('Unable to load reservations');
     } finally {
       setLoading(false);
     }

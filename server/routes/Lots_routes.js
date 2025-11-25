@@ -1,16 +1,20 @@
 import express from 'express'
+import lotsController from '../controllers/Lots_controller.js'
+import { protect, admin } from '../middleware/index.js'
 
 const router = express.Router()
 
-import lotsController from '../controllers/Lots_controller.js'
-
+// GET all lots (public)
 router.get('/', lotsController.getLots)
 
-router.post('/', lotsController.createLot)
+// POST create lot (admin only)
+router.post('/', protect, admin, lotsController.createLot)
 
-router.delete('/:id', lotsController.deleteLot)
+// DELETE lot (admin only)
+router.delete('/:id', protect, admin, lotsController.deleteLot)
 
-router.put('/:id', lotsController.updateLot)
+// PUT update lot (admin only)
+router.put('/:id', protect, admin, lotsController.updateLot)
 
 export default router
 

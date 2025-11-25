@@ -16,14 +16,14 @@ function LotsPage() {
     const fetchLots = async () => {
         try {
             const response = await fetch('http://localhost:8080/api/lots');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            if (response.ok) {
+                const data = await response.json();
+                setLots(data);
+            } else {
+                throw new Error('API unavailable');
             }
-            const data = await response.json();
-            setLots(data);
         } catch (err) {
-            console.error('Error fetching lots:', err);
-            // Use mock data when API isn't available
+            console.log('API not available, using demo mode');
             setLots(getMockLots());
         } finally {
             setLoading(false);
@@ -78,7 +78,7 @@ function LotsPage() {
                 vehicleId: 'demo-vehicle-id'
             };
 
-            const response = await fetch('http://localhost:8080/api/sessions/checkin', {
+            const response = await fetch('http://localhost:8080/api/sessions/check-in', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
