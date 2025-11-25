@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css'
 import Navbar from './components/Navbar_component.jsx'
 import Home from './components/Home.jsx';
-import ParkingLots from './components/ParkingLots.jsx';
+import LotsPage from './components/LotsPage.jsx';
 import Reservations from './components/Reservations.jsx';
 import Profile from './components/Profile.jsx';
 import Login from './components/Login_component.jsx';
@@ -17,7 +17,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/lots" element={<ParkingLots />} />
+            <Route path="/lots" element={<LotsPage />} />
             <Route path="/reservations" element={<Reservations />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login />} />
