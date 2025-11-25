@@ -1,6 +1,7 @@
 /* Global Styles for ParkEase App */
 
 /* Import component styles */
+@import './components/Home.css';
 @import './components/Login.css';
 @import './components/LotsPage.css';
 @import './components/Reservations.css';

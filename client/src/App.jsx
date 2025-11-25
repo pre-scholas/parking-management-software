@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/index.css'
 import './App.css'
+import './utils/ionicons.js'
 import Navbar from './components/Navbar_component.jsx'
 import Home from './components/Home.jsx';
 import LotsPage from './components/LotsPage.jsx';
