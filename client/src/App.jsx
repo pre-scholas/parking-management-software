@@ -1,13 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './index.css'
+import './styles/index.css'
+import './App.css'
 import Navbar from './components/Navbar_component.jsx'
 import Home from './components/Home.jsx';
 import LotsPage from './components/LotsPage.jsx';
 import Reservations from './components/Reservations.jsx';
 import Profile from './components/Profile.jsx';
 import Login from './components/Login_component.jsx';
-
-import './App.css'
 
 function App() {
   return (

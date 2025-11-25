@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './LotsPage.css';
 
 function LotsPage() {
     const [lots, setLots] = useState([]);
