@@ -1,0 +1,137 @@
+.navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 70px;
+    background: $nav-bg-var;
+    box-shadow: 10px 0 0 $primary-color;
+    border-left: 10px solid $nav-bg-var;
+    overflow-x: hidden;
+    transition: width $transition-slow;
+    border-radius: $border-radius-sm;
+    z-index: 1000;
+
+    // border: saddlebrown 1px solid;
+
+    &:hover {
+        width: 300px;
+    }
+
+    ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-left: $spacing-sm;
+        padding-top: 40px;
+
+        li {
+            position: relative;
+            list-style: none;
+            gap: $spacing-xl;
+            width: 100%;
+            border-top-left-radius: $border-radius-md;
+            border-bottom-left-radius: $border-radius-md;
+
+            &.active {
+                background: $gradient-primary;
+                color: #26658c;
+
+                a::before {
+                    content: '';
+                    position: absolute;
+                    top: -30px;
+                    right: 0;
+                    width: 30px;
+                    height: 30px;
+                    background: $nav-bg;
+                    border-radius: $border-radius-full;
+                    box-shadow: 15px 15px 0 $primary-color;
+                    color: #26658c;
+                }
+
+                a::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -30px;
+                    right: 0;
+                    width: 30px;
+                    height: 30px;
+                    background: $nav-bg;
+                    border-radius: $border-radius-full;
+                    box-shadow: 15px -15px 0 $primary-color;
+                    color: #26658c;
+                }
+            }
+
+            a {
+                position: relative;
+                display: flex;
+                width: 100%;
+                text-decoration: none;
+                color: $text-white-var;
+
+                .icon {
+                    position: relative;
+                    display: block;
+                    min-width: 60px;
+                    height: 60px;
+                    line-height: 70px;
+                    text-align: center;
+
+                    ion-icon {
+                        position: relative;
+                        font-size: 1.5em;
+                        z-index: 1;
+                    }
+                }
+
+                .title {
+                    position: relative;
+                    display: block;
+                    padding-left: 10px;
+                    height: 60px;
+                    line-height: 60px;
+                    white-space: nowrap;
+                }
+            }
+
+            button {
+                position: relative;
+                display: flex;
+                width: 100%;
+                text-decoration: none;
+                color: $text-white-var;
+                background: none;
+                border: none;
+                cursor: pointer;
+                text-align: left;
+
+                .icon {
+                    position: relative;
+                    display: block;
+                    min-width: 60px;
+                    height: 60px;
+                    line-height: 70px;
+                    text-align: center;
+
+                    ion-icon {
+                        position: relative;
+                        font-size: 1.5em;
+                        z-index: 1;
+                    }
+                }
+
+                .title {
+                    position: relative;
+                    display: block;
+                    padding-left: 10px;
+                    height: 60px;
+                    line-height: 60px;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}

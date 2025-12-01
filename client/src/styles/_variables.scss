@@ -1,0 +1,107 @@
+// Colors
+$primary-color: #4187f6;
+$primary-dark: #2c5aa0;
+$secondary-color: #6c757d;
+$secondary-dark: #545b62;
+$success-color: #28a745;
+$success-dark: #1e7e34;
+$danger-color: #dc3545;
+$danger-dark: #c82333;
+$warning-color: #ffc107;
+$info-color: #17a2b8;
+
+// Background colors (fallback values)
+$body-bg: rgb(26, 27, 76);
+$page-bg: #f8f9fa;
+$card-bg: white;
+$nav-bg: #2b343b;
+
+// Text colors (fallback values)
+$text-primary: #333;
+$text-secondary: #666;
+$text-muted: #6c757d;
+$text-light: #adb5bd;
+$text-white: white;
+
+// Border colors (fallback values)
+$border-color: #e9ecef;
+$border-light: #f5c6cb;
+
+// Theme-aware variables (use CSS custom properties)
+$body-bg-var: var(--body-bg, #{$body-bg});
+$page-bg-var: var(--page-bg, #{$page-bg});
+$card-bg-var: var(--card-bg, #{$card-bg});
+$nav-bg-var: var(--nav-bg, #{$nav-bg});
+$text-primary-var: var(--text-primary, #{$text-primary});
+$text-secondary-var: var(--text-secondary, #{$text-secondary});
+$text-muted-var: var(--text-muted, #{$text-muted});
+$text-light-var: var(--text-light, #{$text-light});
+$border-color-var: var(--border-color, #{$border-color});
+$border-light-var: var(--border-light, #{$border-light});
+
+// Gradients
+$gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-xxl: 3rem;
+
+// Font sizes
+$font-xs: 0.8rem;
+$font-sm: 0.9rem;
+$font-base: 1rem;
+$font-lg: 1.1rem;
+$font-xl: 1.2rem;
+$font-2xl: 1.5rem;
+$font-3xl: 2rem;
+$font-4xl: 2.5rem;
+$font-5xl: 3rem;
+
+// Font weights
+$font-normal: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+
+// Border radius
+$border-radius-sm: 5px;
+$border-radius: 8px;
+$border-radius-md: 10px;
+$border-radius-lg: 15px;
+$border-radius-xl: 20px;
+$border-radius-full: 50%;
+
+// Shadows (fallback values)
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 6px 12px rgba(0, 0, 0, 0.15);
+$shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
+$shadow-xl: 0 10px 30px rgba(0, 0, 0, 0.1);
+$shadow-2xl: 0 20px 40px rgba(0, 0, 0, 0.1);
+
+// Theme-aware shadows
+$shadow-sm-var: var(--shadow-sm, #{$shadow-sm});
+$shadow-var: var(--shadow, #{$shadow});
+$shadow-md-var: var(--shadow-md, #{$shadow-md});
+$shadow-lg-var: var(--shadow-lg, #{$shadow-lg});
+$shadow-xl-var: var(--shadow-xl, #{$shadow-xl});
+$shadow-2xl-var: var(--shadow-2xl, #{$shadow-2xl});
+
+// Add missing theme-aware variables
+$text-white-var: var(--text-white, #{$text-white});
+$gradient-primary-var: var(--gradient-primary, #{$gradient-primary});
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// Breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+$wide: 1200px;

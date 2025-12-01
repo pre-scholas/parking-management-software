@@ -1,7 +1,7 @@
 // Import React hooks and router components
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from '../hooks';
+import { useAuth, useTheme } from '../hooks';
 
 // Main navigation component for the parking management app
 function Navbar() {
@@ -10,6 +10,8 @@ function Navbar() {
     const location = useLocation();
     // Custom hook for authentication state and actions
     const { user, isAuthenticated, logout } = useAuth();
+    // Custom hook for theme management
+    const { toggleTheme, isDark } = useTheme();
 
 
 
@@ -52,6 +54,13 @@ function Navbar() {
                         <span className="icon"><ion-icon name="person-outline"></ion-icon></span>
                         <span className="title">Profile</span>
                     </Link>
+                </li>
+                {/* Theme toggle */}
+                <li>
+                    <button onClick={toggleTheme} style={{background: 'none', border: 'none', width: '100%', textAlign: 'left'}}>
+                        <span className="icon"><ion-icon name={isDark ? 'sunny-outline' : 'moon-outline'}></ion-icon></span>
+                        <span className="title">{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+                    </button>
                 </li>
                 {/* Conditional rendering: show logout button if authenticated, login link if not */}
                 {isAuthenticated ? (

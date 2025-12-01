@@ -1,0 +1,150 @@
+.reservations-container {
+  padding: $spacing-xl;
+  max-width: $wide;
+  margin: 0 auto;
+  background: $page-bg-var;
+  min-height: 100vh;
+
+  h1 {
+    color: $text-primary-var;
+    margin-bottom: $spacing-xl;
+    text-align: center;
+  }
+}
+
+.reservations-section {
+  margin-bottom: $spacing-xxl;
+
+  h2 {
+    color: $text-primary-var;
+    margin-bottom: $spacing-md;
+    padding-bottom: $spacing-sm;
+    border-bottom: 2px solid $primary-color;
+  }
+}
+
+.reservations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: $spacing-lg;
+}
+
+.reservation-card {
+  background: $card-bg-var;
+  border-radius: $border-radius-md;
+  padding: $spacing-lg;
+  box-shadow: $shadow-var;
+  border-left: 4px solid $primary-color;
+  transition: transform $transition-fast;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md-var;
+  }
+
+  &.past {
+    border-left-color: $secondary-color;
+    opacity: 0.8;
+  }
+}
+
+.reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  h3 {
+    margin: 0;
+    color: $text-primary-var;
+    font-size: 1.2rem;
+  }
+}
+
+.status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  &.current {
+    background: #d4edda;
+    color: #155724;
+  }
+
+  &.past {
+    background: #f8f9fa;
+    color: #6c757d;
+  }
+}
+
+.reservation-details {
+  p {
+    margin: 0.5rem 0;
+    color: $text-secondary-var;
+  }
+
+  strong {
+    color: $text-primary-var;
+  }
+}
+
+.cancel-btn {
+  background: $danger-color;
+  color: $text-white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 1rem;
+  width: 100%;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: $danger-dark;
+  }
+}
+
+.no-reservations {
+  text-align: center;
+  color: $text-muted-var;
+  font-style: italic;
+  padding: 2rem;
+  background: $page-bg-var;
+  border-radius: 8px;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+}
+
+.loading {
+  color: $primary-color;
+}
+
+.error {
+  color: $danger-color;
+  background: #f8d7da;
+  border: 1px solid $border-light-var;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .reservations-container {
+    padding: 1rem;
+  }
+  
+  .reservations-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .reservation-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

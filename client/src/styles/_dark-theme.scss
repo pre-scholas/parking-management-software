@@ -1,0 +1,54 @@
+// Dark theme variables
+[data-theme="dark"] {
+  // Background colors
+  --body-bg: #0f1419;
+  --page-bg: #1a1f2e;
+  --card-bg: #252b3b;
+  --nav-bg: #1e2329;
+
+  // Text colors
+  --text-primary: #e2e8f0;
+  --text-secondary: #a0aec0;
+  --text-muted: #718096;
+  --text-light: #4a5568;
+
+  // Border colors
+  --border-color: #2d3748;
+  --border-light: #4a5568;
+
+  // Text colors (keep white for dark theme)
+  --text-white: #{$text-white};
+
+  // Gradients (keep same for dark theme)
+  --gradient-primary: #{$gradient-primary};
+
+  // Component specific
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --shadow-2xl: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+// Light theme (default)
+:root {
+  --body-bg: #{$body-bg};
+  --page-bg: #{$page-bg};
+  --card-bg: #{$card-bg};
+  --nav-bg: #{$nav-bg};
+  --text-primary: #{$text-primary};
+  --text-secondary: #{$text-secondary};
+  --text-muted: #{$text-muted};
+  --text-light: #{$text-light};
+  --text-white: #{$text-white};
+  --border-color: #{$border-color};
+  --border-light: #{$border-light};
+  --gradient-primary: #{$gradient-primary};
+  --shadow: #{$shadow};
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+  --shadow-xl: #{$shadow-xl};
+  --shadow-2xl: #{$shadow-2xl};
+}

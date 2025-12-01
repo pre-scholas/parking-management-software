@@ -1,0 +1,330 @@
+.lots-container {
+  padding: $spacing-xl;
+  max-width: $wide;
+  margin: 0 auto;
+  background: $page-bg-var;
+  min-height: 100vh;
+}
+
+.lots-header {
+  text-align: center;
+  margin-bottom: $spacing-xxl;
+
+  h1 {
+    color: $text-primary;
+    font-size: $font-4xl;
+    margin-bottom: $spacing-sm;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: $font-lg;
+  }
+}
+
+.lots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: $spacing-xl;
+}
+
+.lot-card {
+  background: $card-bg-var;
+  border-radius: $border-radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-var;
+  transition: all $transition;
+  border-left: 4px solid $primary-color;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-lg;
+  }
+
+  &.full {
+    border-left-color: $danger-color;
+    opacity: 0.8;
+  }
+
+  &.low {
+    border-left-color: $warning-color;
+  }
+
+  &.medium {
+    border-left-color: $success-color;
+  }
+
+  &.high {
+    border-left-color: $primary-color;
+  }
+}
+
+.lot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  h3 {
+    margin: 0;
+    color: $text-primary-var;
+    font-size: 1.3rem;
+  }
+}
+
+.availability-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  &.high {
+    background: #d4edda;
+    color: #155724;
+  }
+
+  &.medium {
+    background: #d1ecf1;
+    color: #0c5460;
+  }
+
+  &.low {
+    background: #fff3cd;
+    color: #856404;
+  }
+
+  &.full {
+    background: #f8d7da;
+    color: #721c24;
+  }
+}
+
+.lot-details {
+  margin-bottom: 1.5rem;
+
+  .address {
+    color: $text-secondary-var;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: "📍";
+      margin-right: 0.5rem;
+    }
+  }
+
+  .spots-info {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+
+    .available {
+      font-size: 2rem;
+      font-weight: 700;
+      color: $primary-color;
+    }
+
+    .separator {
+      font-size: 1.5rem;
+      color: $text-light-var;
+    }
+
+    .total {
+      font-size: 1.2rem;
+      color: $text-secondary-var;
+    }
+
+    .label {
+      font-size: 0.9rem;
+      color: $text-secondary-var;
+      margin-left: 0.5rem;
+    }
+  }
+
+  .rate {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: $success-color;
+    }
+
+    .period {
+      color: $text-secondary-var;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.availability-bar {
+  height: 6px;
+  background: $border-color-var;
+  border-radius: 3px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+
+  .fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+
+    &.high {
+      background: $success-color;
+    }
+
+    &.medium {
+      background: $info-color;
+    }
+
+    &.low {
+      background: $warning-color;
+    }
+
+    &.full {
+      background: $danger-color;
+    }
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+
+  .check-in-btn, .reserve-btn {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: $text-white-var;
+
+    &.disabled {
+      background: $secondary-color;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  .check-in-btn {
+    background: $primary-color;
+
+    &:hover:not(.disabled) {
+      background: $primary-dark;
+      transform: translateY(-2px);
+    }
+  }
+
+  .reserve-btn {
+    background: $success-color;
+
+    &:hover:not(.disabled) {
+      background: $success-dark;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.no-lots {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #666;
+  }
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 4rem 2rem;
+  font-size: 1.2rem;
+}
+
+.loading {
+  color: $primary-color;
+}
+
+.error {
+  color: $danger-color;
+  background: #f8d7da;
+  border: 1px solid $border-light-var;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .lots-container {
+    padding: 1rem;
+  }
+  
+  .lots-header h1 {
+    font-size: 2rem;
+  }
+  
+  .lots-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .lot-card {
+    padding: 1rem;
+  }
+  
+  .lot-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

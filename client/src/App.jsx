@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './styles/index.css'
-import './styles/App.css'
+import './styles/index.scss'
+import './styles/App.scss'
 import './utils/ionicons.js'
+import { useTheme } from './hooks';
 import Navbar from './components/Navbar_component.jsx'
 import Home from './components/Home.jsx';
 import LotsPage from './components/LotsPage.jsx';
@@ -10,6 +11,8 @@ import UserProfile from './components/UserProfile_component.jsx';
 import Login from './components/Login_component.jsx';
 
 function App() {
+  // Initialize theme
+  useTheme();
   return (
     <Router>
       <div className="App">
