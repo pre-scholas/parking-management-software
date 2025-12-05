@@ -94,6 +94,7 @@ $shadow-2xl-var: var(--shadow-2xl, #{$shadow-2xl});
 // Add missing theme-aware variables
 $text-white-var: var(--text-white, #{$text-white});
 $gradient-primary-var: var(--gradient-primary, #{$gradient-primary});
+$text-muted-var: var(--text-muted, #{$text-muted});
 
 // Transitions
 $transition-fast: 0.2s ease;

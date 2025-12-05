@@ -63,9 +63,15 @@ function UserProfile() {
             // Mock data fallback - calculate from current reservations
             const currentReservations = JSON.parse(localStorage.getItem('userReservations') || '[]');
             const totalSpent = currentReservations.reduce((sum, res) => sum + (res.totalCost || 0), 0);
+            const activeReservations = currentReservations.filter(res => new Date(res.startTime) > new Date() && !res.checkedIn).length;
+            const checkedInReservations = currentReservations.filter(res => res.checkedIn && !res.checkedOut).length;
+            const completedReservations = currentReservations.filter(res => res.checkedOut || new Date(res.startTime) <= new Date()).length;
             
             setStats({
                 totalReservations: currentReservations.length,
+                activeReservations: activeReservations,
+                checkedInReservations: checkedInReservations,
+                completedReservations: completedReservations,
                 totalSpent: totalSpent,
                 favoriteSpot: currentReservations.length > 0 ? currentReservations[0].lotId?.name || 'Downtown Garage' : 'N/A'
             });
@@ -217,17 +223,43 @@ function UserProfile() {
                         <h3>Parking Statistics</h3>
                     </div>
                     <div className="card-content">
-                        <div className="stat-item">
-                            <span className="stat-label">Total Reservations</span>
-                            <span className="stat-value">{stats.totalReservations}</span>
-                        </div>
-                        <div className="stat-item">
-                            <span className="stat-label">Total Spent</span>
-                            <span className="stat-value">${stats.totalSpent}</span>
-                        </div>
-                        <div className="stat-item">
-                            <span className="stat-label">Favorite Spot</span>
-                            <span className="stat-value">{stats.favoriteSpot}</span>
+                        <div className="stats-grid">
+                            <div className="stat-card">
+                                <div className="stat-icon">
+                                    <ion-icon name="calendar-outline"></ion-icon>
+                                </div>
+                                <div className="stat-info">
+                                    <span className="stat-value">{stats.activeReservations || 0}</span>
+                                    <span className="stat-label">Active</span>
+                                </div>
+                            </div>
+                            <div className="stat-card">
+                                <div className="stat-icon">
+                                    <ion-icon name="checkmark-circle-outline"></ion-icon>
+                                </div>
+                                <div className="stat-info">
+                                    <span className="stat-value">{stats.checkedInReservations || 0}</span>
+                                    <span className="stat-label">Checked In</span>
+                                </div>
+                            </div>
+                            <div className="stat-card">
+                                <div className="stat-icon">
+                                    <ion-icon name="checkmark-done-outline"></ion-icon>
+                                </div>
+                                <div className="stat-info">
+                                    <span className="stat-value">{stats.completedReservations || 0}</span>
+                                    <span className="stat-label">Completed</span>
+                                </div>
+                            </div>
+                            <div className="stat-card">
+                                <div className="stat-icon">
+                                    <ion-icon name="cash-outline"></ion-icon>
+                                </div>
+                                <div className="stat-info">
+                                    <span className="stat-value">${stats.totalSpent || 0}</span>
+                                    <span className="stat-label">Total Spent</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

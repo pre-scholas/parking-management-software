@@ -18,6 +18,7 @@
 
   // Text colors (keep white for dark theme)
   --text-white: #{$text-white};
+  --text-muted: #718096;
 
   // Gradients (keep same for dark theme)
   --gradient-primary: #{$gradient-primary};
@@ -42,6 +43,7 @@
   --text-muted: #{$text-muted};
   --text-light: #{$text-light};
   --text-white: #{$text-white};
+  --text-muted: #{$text-muted};
   --border-color: #{$border-color};
   --border-light: #{$border-light};
   --gradient-primary: #{$gradient-primary};

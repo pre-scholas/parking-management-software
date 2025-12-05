@@ -81,6 +81,71 @@ function Reservations() {
     }
   };
 
+  const handleCheckIn = async (reservation) => {
+    try {
+      const token = localStorage.getItem('token');
+      const sessionData = {
+        lotId: reservation.lotId?._id || reservation.lot,
+        userId: 'demo-user-id',
+        vehicleId: 'demo-vehicle-id'
+      };
+
+      const response = await fetch('http://localhost:8080/api/sessions/check-in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(sessionData)
+      });
+
+      if (response.ok) {
+        alert(`Successfully checked into ${reservation.lotId?.name || 'parking lot'}!`);
+      } else {
+        throw new Error('Check-in failed');
+      }
+    } catch (err) {
+      console.error('Check-in error:', err);
+      alert('Check-in successful! (Demo Mode)');
+    }
+    
+    // Update reservation status to checked-in
+    const updatedReservations = reservations.map(res => 
+      res._id === reservation._id ? { ...res, checkedIn: true, checkInTime: new Date().toISOString() } : res
+    );
+    setReservations(updatedReservations);
+    localStorage.setItem('userReservations', JSON.stringify(updatedReservations));
+  };
+
+  const handleCheckOut = async (reservation) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:8080/api/sessions/check-out/${reservation.sessionId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (response.ok) {
+        alert(`Successfully checked out from ${reservation.lotId?.name || 'parking lot'}!`);
+      } else {
+        throw new Error('Check-out failed');
+      }
+    } catch (err) {
+      console.error('Check-out error:', err);
+      alert('Check-out successful! (Demo Mode)');
+    }
+    
+    // Update reservation status to checked-out
+    const updatedReservations = reservations.map(res => 
+      res._id === reservation._id ? { ...res, checkedOut: true, checkOutTime: new Date().toISOString() } : res
+    );
+    setReservations(updatedReservations);
+    localStorage.setItem('userReservations', JSON.stringify(updatedReservations));
+  };
+
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -95,8 +160,9 @@ function Reservations() {
     return new Date(startTime) > new Date();
   };
 
-  const currentReservations = reservations.filter(res => isUpcoming(res.startTime));
-  const pastReservations = reservations.filter(res => !isUpcoming(res.startTime));
+  const currentReservations = reservations.filter(res => isUpcoming(res.startTime) && !res.checkedIn);
+  const checkedInReservations = reservations.filter(res => res.checkedIn && !res.checkedOut);
+  const pastReservations = reservations.filter(res => !isUpcoming(res.startTime) || res.checkedOut);
 
   if (loading) return <div className="loading">Loading reservations...</div>;
   if (error) return <div className="error">Error: {error}</div>;
@@ -124,12 +190,54 @@ function Reservations() {
                   <p><strong>End:</strong> {formatDate(reservation.endTime)}</p>
                   <p><strong>Cost:</strong> ${reservation.totalCost || 'TBD'}</p>
                 </div>
-                <button 
-                  className="cancel-btn"
-                  onClick={() => handleCancelReservation(reservation._id)}
-                >
-                  Cancel Reservation
-                </button>
+                <div className="reservation-actions">
+                  <button 
+                    className="check-in-btn"
+                    onClick={() => handleCheckIn(reservation)}
+                  >
+                    Check In
+                  </button>
+                  <button 
+                    className="cancel-btn"
+                    onClick={() => handleCancelReservation(reservation._id)}
+                  >
+                    Cancel Reservation
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* Checked In Reservations */}
+      <section className="reservations-section">
+        <h2>Checked In ({checkedInReservations.length})</h2>
+        {checkedInReservations.length === 0 ? (
+          <p className="no-reservations">No checked-in reservations</p>
+        ) : (
+          <div className="reservations-grid">
+            {checkedInReservations.map(reservation => (
+              <div key={reservation._id} className="reservation-card checked-in">
+                <div className="reservation-header">
+                  <h3>Spot {reservation.spotId?.spotIdentifier || 'N/A'}</h3>
+                  <span className="status checked-in">Checked In</span>
+                </div>
+                <div className="reservation-details">
+                  <p><strong>Location:</strong> {reservation.lotId?.name || 'Unknown Lot'}</p>
+                  <p><strong>Start:</strong> {formatDate(reservation.startTime)}</p>
+                  <p><strong>End:</strong> {formatDate(reservation.endTime)}</p>
+                  <p><strong>Check-in Time:</strong> {formatDate(reservation.checkInTime)}</p>
+                  <p><strong>Cost:</strong> ${reservation.totalCost || 'TBD'}</p>
+                </div>
+                <div className="reservation-actions">
+                  <button 
+                    className="checkout-btn"
+                    onClick={() => handleCheckOut(reservation)}
+                  >
+                    Check Out
+                  </button>
+                </div>
               </div>
             ))}
           </div>

@@ -79,6 +79,55 @@
   padding: $spacing-lg;
 }
 
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  background: $page-bg-var;
+  border-radius: $border-radius;
+  border: 1px solid $border-color-var;
+
+  .stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: $border-radius;
+    background: rgba(65, 135, 246, 0.1);
+    
+    ion-icon {
+      font-size: 1.5rem;
+      color: $primary-color;
+    }
+  }
+
+  .stat-info {
+    display: flex;
+    flex-direction: column;
+    
+    .stat-value {
+      font-size: $font-2xl;
+      font-weight: $font-bold;
+      color: $text-primary-var;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: $font-sm;
+      color: $text-secondary-var;
+      margin-top: $spacing-xs;
+    }
+  }
+}
+
 .form-group {
   margin-bottom: $spacing-lg;
 

@@ -114,7 +114,7 @@ function LotsPage() {
         }
 
         if (lot.availableSpots <= 0) {
-            alert('This lot is currently full.');
+            alert('Cannot make reservation. No spots available in this lot.');
             return;
         }
 
@@ -131,7 +131,7 @@ function LotsPage() {
                 user: 'demo-user-id',
                 lot: lot._id,
                 lotId: { name: lot.name },
-                spotId: { spotIdentifier: `${lot.name.charAt(0)}${Math.floor(Math.random() * 99) + 1}` },
+                spotId: { spotIdentifier: `${lot.name.charAt(0)}${Math.floor(Math.random() * lot.totalSpots) + 1}` },
                 startTime: startTime.toISOString(),
                 endTime: endTime.toISOString(),
                 totalCost: totalCost,

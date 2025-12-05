@@ -18,7 +18,9 @@ export const useTheme = () => {
 
   // Apply initial theme on mount
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    const initialTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', initialTheme);
+    setTheme(initialTheme);
   }, []);
 
   const toggleTheme = () => {

@@ -46,6 +46,10 @@
     border-left-color: $secondary-color;
     opacity: 0.8;
   }
+
+  &.checked-in {
+    border-left-color: $warning-color;
+  }
 }
 
 .reservation-header {
@@ -77,6 +81,11 @@
     background: #f8f9fa;
     color: #6c757d;
   }
+
+  &.checked-in {
+    background: #fff3cd;
+    color: #856404;
+  }
 }
 
 .reservation-details {
@@ -90,16 +99,53 @@
   }
 }
 
-.cancel-btn {
-  background: $danger-color;
-  color: $text-white;
+.reservation-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.check-in-btn {
+  background: $primary-color;
+  color: $text-white-var;
   border: none;
   padding: 0.75rem 1rem;
   border-radius: 5px;
   cursor: pointer;
   font-weight: 500;
-  margin-top: 1rem;
+  flex: 1;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: $primary-dark;
+  }
+}
+
+.checkout-btn {
+  background: $warning-color;
+  color: $text-white-var;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
   width: 100%;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: darken($warning-color, 10%);
+  }
+}
+
+.cancel-btn {
+  background: $danger-color;
+  color: $text-white-var;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  flex: 1;
   transition: background 0.2s ease;
 
   &:hover {
